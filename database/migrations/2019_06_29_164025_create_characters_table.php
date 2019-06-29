@@ -21,6 +21,8 @@ class CreateCharactersTable extends Migration
             $table->string('eye_color');
             $table->string('hair_color');
             $table->timestamps();
+
+            $table->primary('id');
         });
     }
 

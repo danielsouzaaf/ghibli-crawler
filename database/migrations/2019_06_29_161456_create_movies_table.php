@@ -23,6 +23,8 @@ class CreateMoviesTable extends Migration
             $table->integer('rt_score');
             $table->string('url');
             $table->timestamps();
+
+            $table->primary('id');
         });
     }
 
