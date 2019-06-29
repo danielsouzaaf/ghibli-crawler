@@ -43,5 +43,19 @@ class CharacterRepository implements InsertRepositoryInterface
         return Character::with('movies')->get();
     }
 
+    public function filteredOrderedAndSortedWithMovies($filter, $order = null, $sort = null)
+    {
+        $query = Character::with('movies');
+        if ($filter)
+        $query->where('name', 'ilike', "%{$filter}%")
+            ->orWhere('age', 'ilike', "%{$filter}%")
+            ->orWhereHas('movies', function ($query) use ($filter) {
+                return $query->where('title', 'ilike', "%{$filter}%")
+                    ->orWhere('rt_score', 'ilike', "%{$filter}%");
+        });
+
+        return $query->get();
+    }
+
 
 }

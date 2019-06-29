@@ -19,8 +19,8 @@ class CreateMoviesTable extends Migration
             $table->text('description');
             $table->string('director');
             $table->string('producer');
-            $table->integer('release_date');
-            $table->integer('rt_score');
+            $table->string('release_date');
+            $table->string('rt_score');
             $table->string('url');
             $table->timestamps();
 
