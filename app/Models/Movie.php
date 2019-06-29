@@ -36,5 +36,8 @@ class Movie extends Model
         'url',
     ];
 
-
+    public function characters()
+    {
+        return $this->belongsTo(Character::class);
+    }
 }

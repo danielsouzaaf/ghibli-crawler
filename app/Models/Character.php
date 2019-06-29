@@ -27,4 +27,9 @@ class Character extends Model
     protected $fillable = [
         'id', 'name', 'gender', 'eye_color', 'hair_color', 'release_date', 'rt_score'
     ];
+
+    public function movies()
+    {
+        return $this->belongsToMany(Movie::class);
+    }
 }
