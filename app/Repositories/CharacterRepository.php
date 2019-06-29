@@ -15,9 +15,22 @@ class CharacterRepository implements InsertRepositoryInterface
         ], $data);
     }
 
-    public function updateOrCreateWithMovies($data)
+    public function updateOrCreateWithMovies($data, MovieRepository $movieRepository)
     {
         $this->performUpdateOrCreate($data);
+        $movies = $movieRepository->whereInUrls($data['movies'])->pluck('id');
+
+        $this->attachRelatedMovies($data['id'], $movies);
+    }
+
+    public function attachRelatedMovies($id, $moviesId)
+    {
+        $this->findById($id)->attach($moviesId);
+    }
+
+    public function findById($id)
+    {
+        return Character::find($id);
     }
 
 
