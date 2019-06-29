@@ -34,7 +34,7 @@ class CharacterPresenter
                     ];
                 })
             ];
-        });
+        })->toArray();
 
         return $this->output($mapped, $format);
     }
@@ -50,7 +50,24 @@ class CharacterPresenter
 
     private function outputAsCsv($mapped)
     {
-        //TODO: Implementar CSV
+        $headers = [
+            'Cache-Control'       => 'must-revalidate, post-check=0, pre-check=0'
+            ,   'Content-type'        => 'text/csv'
+            ,   'Content-Disposition' => 'attachment; filename=personagens.csv'
+            ,   'Expires'             => '0'
+            ,   'Pragma'              => 'public'
+        ];
+
+        $callback = function() use ($mapped)
+        {
+            $FH = fopen('php://output', 'w');
+            foreach ($mapped as $row) {
+                fputcsv($FH, $row);
+            }
+            fclose($FH);
+        };
+
+        return Response::streamDownload($callback, 'personagens.csv', $headers);
     }
 
     private function outputAsJson($mapped)
