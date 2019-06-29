@@ -35,12 +35,16 @@ class CharacterPresenter
             ];
         });
 
+        return $this->output($mapped, $format);
+    }
+
+    private function output($mapped, $format)
+    {
         if ($format == self::FORMAT_JSON)
             return $this->outputAsJson($mapped);
         else if ($format == self::FORMAT_CSV)
             return $this->outputAsCsv($mapped);
         return $this->outputAsHtml($mapped);
-
     }
 
     private function outputAsCsv($mapped)
