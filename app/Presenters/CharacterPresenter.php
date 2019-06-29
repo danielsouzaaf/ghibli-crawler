@@ -6,6 +6,7 @@ namespace GhibliCrawler\Presenters;
 
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Response;
+use Illuminate\Support\Facades\View;
 
 class CharacterPresenter
 {
@@ -29,7 +30,7 @@ class CharacterPresenter
                     return [
                         'titulo' => $movie->title,
                         'ano_lancamento' => $movie->release_date,
-                        'pontuacao_rotten_tomato' => $movie->rt_score
+                        'pontuacao_rotten_tomatoes' => $movie->rt_score
                     ];
                 })
             ];
@@ -59,6 +60,9 @@ class CharacterPresenter
 
     private function outputAsHtml($mapped)
     {
+        return View::make('characters.table', [
+            'mapped' => $mapped,
+        ]);
         //TODO: Implementar HTML
     }
 
