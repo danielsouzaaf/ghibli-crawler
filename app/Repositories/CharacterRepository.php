@@ -23,7 +23,7 @@ class CharacterRepository implements InsertRepositoryInterface
         $this->attachRelatedMovies($data['id'], $movies);
     }
 
-    public function attachRelatedMovies($id, $moviesId)
+    private function attachRelatedMovies($id, $moviesId)
     {
         $this->findById($id)->movies()->attach($moviesId);
     }
@@ -31,6 +31,16 @@ class CharacterRepository implements InsertRepositoryInterface
     public function findById($id)
     {
         return Character::find($id);
+    }
+
+    public function all()
+    {
+        return Character::all();
+    }
+
+    public function allWithMovies()
+    {
+        return Character::with('movies')->get();
     }
 
 
