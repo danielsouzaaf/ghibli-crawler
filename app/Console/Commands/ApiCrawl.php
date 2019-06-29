@@ -45,7 +45,9 @@ class ApiCrawl extends Command
      */
     public function handle()
     {
-        var_dump($this->crawler->crawl('https://ghibliapi.herokuapp.com/films'));
-        var_dump($this->crawler->crawl('https://ghibliapi.herokuapp.com/people'));
+        $moviesData = $this->crawler->crawl('https://ghibliapi.herokuapp.com/films');
+        $charactersData = $this->crawler->crawl('https://ghibliapi.herokuapp.com/people');
+
+
     }
 }
