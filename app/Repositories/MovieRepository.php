@@ -14,4 +14,9 @@ class MovieRepository implements InsertRepositoryInterface
             'id' => $data['id']
         ], $data);
     }
+
+    public function findbyUrl($url)
+    {
+        return Movie::where('url', $url)->first();
+    }
 }
