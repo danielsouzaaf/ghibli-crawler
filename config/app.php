@@ -169,11 +169,11 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
-        App\Providers\AuthServiceProvider::class,
-        // App\Providers\BroadcastServiceProvider::class,
-        App\Providers\EventServiceProvider::class,
-        App\Providers\RouteServiceProvider::class,
+        GhibliCrawler\Providers\AppServiceProvider::class,
+        GhibliCrawler\Providers\AuthServiceProvider::class,
+        // GhibliCrawler\Providers\BroadcastServiceProvider::class,
+        GhibliCrawler\Providers\EventServiceProvider::class,
+        GhibliCrawler\Providers\RouteServiceProvider::class,
 
     ],
 

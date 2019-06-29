@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Providers;
+namespace GhibliCrawler\Providers;
 
 use Illuminate\Support\ServiceProvider;
 
