@@ -2,6 +2,9 @@
 
 namespace GhibliCrawler\Console\Commands;
 
+use GhibliCrawler\Http\Crawlers\CrawlerInterface;
+use GhibliCrawler\Http\Crawlers\PeopleCrawler;
+use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 
 class ApiCrawl extends Command
@@ -20,6 +23,9 @@ class ApiCrawl extends Command
      */
     protected $description = 'Obter e armazenar as informações da API do Studio Ghibli.';
 
+    private $peopleCrawler;
+    private $client;
+
     /**
      * Create a new command instance.
      *
@@ -27,6 +33,8 @@ class ApiCrawl extends Command
      */
     public function __construct()
     {
+        $this->client = new Client();
+        $this->peopleCrawler = new PeopleCrawler('https://ghibliapi.herokuapp.com/people', $this->client);
         parent::__construct();
     }
 
@@ -37,6 +45,6 @@ class ApiCrawl extends Command
      */
     public function handle()
     {
-        //
+        var_dump($this->peopleCrawler->crawl());
     }
 }
