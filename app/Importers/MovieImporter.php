@@ -19,6 +19,5 @@ class MovieImporter implements ImporterInterface
         $movieData->each(function($movie) {
             $this->moviesRepository->performUpdateOrCreate($movie);
         });
-
     }
 }

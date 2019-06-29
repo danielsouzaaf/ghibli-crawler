@@ -17,7 +17,7 @@ class CreateCharactersTable extends Migration
             $table->string('id');
             $table->string('name');
             $table->string('gender');
-            $table->string('age');
+            $table->string('age')->nullable();
             $table->string('eye_color');
             $table->string('hair_color');
             $table->timestamps();
