@@ -4,7 +4,9 @@
 namespace GhibliCrawler\Http\Importers;
 
 
+use Illuminate\Database\Eloquent\Collection;
+
 interface ImporterInterface
 {
-    public function import($data);
+    public function import(Collection $data);
 }
