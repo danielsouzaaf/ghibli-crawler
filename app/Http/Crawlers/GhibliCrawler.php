@@ -19,6 +19,6 @@ class GhibliCrawler implements CrawlerInterface
     {
         $request = $this->client->get($url);
 
-        return json_decode($request->getBody()->getContents(), true);
+        return collect(json_decode($request->getBody()->getContents(), true));
     }
 }

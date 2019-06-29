@@ -48,6 +48,6 @@ class ApiCrawl extends Command
         $moviesData = $this->crawler->crawl('https://ghibliapi.herokuapp.com/films');
         $charactersData = $this->crawler->crawl('https://ghibliapi.herokuapp.com/people');
 
-
+        var_dump($charactersData);
     }
 }
