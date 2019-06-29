@@ -25,7 +25,7 @@ class Character extends Model
      */
 
     protected $fillable = [
-        'id', 'name', 'gender', 'eye_color', 'hair_color', 'release_date', 'rt_score'
+        'id', 'name', 'gender', 'eye_color', 'hair_color', 'age',
     ];
 
     public function movies()
