@@ -4,7 +4,7 @@ namespace GhibliCrawler\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Movie extends Model
+class Character extends Model
 {
     /**
      * Indicates if the IDs are auto-incrementing.
@@ -23,18 +23,8 @@ class Movie extends Model
     /*
      * The attributes that should be mass assignable.
      */
+
     protected $fillable = [
-        'id', 'title', 'description', 'director', 'producer', 'release_date', 'rt_score', 'url'
+        'id', 'name', 'gender', 'eye_color', 'hair_color', 'release_date', 'rt_score'
     ];
-
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'url',
-    ];
-
-
 }
