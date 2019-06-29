@@ -54,5 +54,6 @@ class ApiCrawl extends Command
 
         $this->movieImporter->import($moviesData);
 
+
     }
 }

@@ -6,7 +6,7 @@ namespace GhibliCrawler\Repositories;
 
 use GhibliCrawler\Models\Movie;
 
-class MovieRepository
+class MovieRepository implements InsertRepositoryInterface
 {
     public function performUpdateOrCreate($data)
     {
