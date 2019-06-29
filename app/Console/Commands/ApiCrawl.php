@@ -4,7 +4,7 @@ namespace GhibliCrawler\Console\Commands;
 
 use GhibliCrawler\Http\Crawlers\CrawlerInterface;
 use GhibliCrawler\Http\Crawlers\GhibliCrawler;
-use GhibliCrawler\Http\Importers\MovieImporter;
+use GhibliCrawler\Importers\MovieImporter;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 

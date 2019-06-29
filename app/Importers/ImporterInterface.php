@@ -1,7 +1,7 @@
 <?php
 
 
-namespace GhibliCrawler\Http\Importers;
+namespace GhibliCrawler\Importers;
 
 
 use Illuminate\Support\Collection;
