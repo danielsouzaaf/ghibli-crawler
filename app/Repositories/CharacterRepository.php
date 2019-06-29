@@ -47,12 +47,14 @@ class CharacterRepository implements InsertRepositoryInterface
     {
         $query = Character::with('movies');
         if ($filter)
-        $query->where('name', 'ilike', "%{$filter}%")
-            ->orWhere('age', 'ilike', "%{$filter}%")
-            ->orWhereHas('movies', function ($query) use ($filter) {
-                return $query->where('title', 'ilike', "%{$filter}%")
-                    ->orWhere('rt_score', 'ilike', "%{$filter}%");
+            $query->where('name', 'ilike', "%{$filter}%")
+                ->orWhere('age', 'ilike', "%{$filter}%")
+                ->orWhereHas('movies', function ($query) use ($filter) {
+                    return $query->where('title', 'ilike', "%{$filter}%")
+                        ->orWhere('rt_score', 'ilike', "%{$filter}%");
         });
+        if ($order)
+            $query->orderBy($order, $sort ? $sort : 'asc');
 
         return $query->get();
     }

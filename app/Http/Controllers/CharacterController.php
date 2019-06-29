@@ -23,7 +23,8 @@ class CharacterController extends Controller
 
     public function results(Request $request)
     {
-        $characters = $this->characterRepository->filteredOrderedAndSortedWithMovies($request->input('filter'));
+        $characters = $this->characterRepository->filteredOrderedAndSortedWithMovies($request->input('filter'),
+            $request->input('order'), $request->input('sort'));
 
         return $this->presenter->present($characters, CharacterPresenter::FORMATS_ARRAY[$request->input('fmt')]);
     }
