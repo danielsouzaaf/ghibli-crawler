@@ -3,21 +3,22 @@
 
 namespace GhibliCrawler\Http\Importers;
 
-
-use GhibliCrawler\Models\Movie;
 use GhibliCrawler\Repositories\MovieRepository;
-use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection;
 
 class MovieImporter implements ImporterInterface
 {
     private $moviesRepository;
-    public function __construct()
+    public function __construct(MovieRepository $movies)
     {
-        $this->moviesRepository = new MovieRepository;
+        $this->moviesRepository = $movies;
     }
 
     public function import(Collection $movieData)
     {
+        $movieData->each(function($movie) {
+            $this->moviesRepository->performUpdateOrCreate($movie);
+        });
 
     }
 }

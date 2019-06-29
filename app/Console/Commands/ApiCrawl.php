@@ -4,6 +4,7 @@ namespace GhibliCrawler\Console\Commands;
 
 use GhibliCrawler\Http\Crawlers\CrawlerInterface;
 use GhibliCrawler\Http\Crawlers\GhibliCrawler;
+use GhibliCrawler\Http\Importers\MovieImporter;
 use GuzzleHttp\Client;
 use Illuminate\Console\Command;
 
@@ -25,16 +26,19 @@ class ApiCrawl extends Command
 
     private $crawler;
     private $client;
+    private $movieImporter;
+    private $characterImporter;
 
     /**
      * Create a new command instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(Client $client, MovieImporter $movieImporter)
     {
-        $this->client = new Client();
+        $this->client = $client;
         $this->crawler = new GhibliCrawler($this->client);
+        $this->movieImporter = $movieImporter;
         parent::__construct();
     }
 
@@ -48,6 +52,7 @@ class ApiCrawl extends Command
         $moviesData = $this->crawler->crawl('https://ghibliapi.herokuapp.com/films');
         $charactersData = $this->crawler->crawl('https://ghibliapi.herokuapp.com/people');
 
-        var_dump($charactersData);
+        $this->movieImporter->import($moviesData);
+
     }
 }

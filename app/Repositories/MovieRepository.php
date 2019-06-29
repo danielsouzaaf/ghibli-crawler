@@ -11,7 +11,7 @@ class MovieRepository
     public function performUpdateOrCreate($data)
     {
         Movie::updateOrCreate([
-            'id' => $data->id
+            'id' => $data['id']
         ], $data);
     }
 }
