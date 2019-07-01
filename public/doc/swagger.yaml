@@ -1,0 +1,137 @@
+swagger: "2.0"
+info:
+  description: "API desenvolvida como teste técnico para a Gblix. É uma api basseada nas informações contidas na API do incrível Studio Ghibli."
+  version: "1.0.0"
+  title: "Ghibli Crawler"
+  contact:
+    email: "daniel.souza.af@gmail.com"
+  license:
+    name: "Apache 2.0"
+    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+host: "ghiblicrawler.herokuapp.com"
+basePath: "/"
+tags:
+- name: "pessoas"
+  description: "Informações sobre os personagens e os filmes que aparecem"
+schemes:
+- "https"
+paths:
+  pessoas:
+    get:
+      tags:
+      - "pessoas"
+      summary: "Retorna os personagens cadastrados no sistema"
+      description: ""
+      operationId: "pessoas"
+      consumes:
+      - "application/json"
+      - "application/xml"
+      produces:
+      - "application/json"
+      - "application/csv"
+      - "application/html"
+      parameters:
+      - name: "fmt"
+        in: "query"
+        description: "Formato esperado de retorno"
+        required: true
+        type: "array"
+        items:
+          type: "string"
+          enum:
+          - "json"
+          - "csv"
+          - "html"
+      - name: "filter"
+        in: "query"
+        description: "Campo pelo qual se deve filtrar os resultados"
+        required: false
+        type: "string"
+      - name: "order"
+        in: "query"
+        description: "Campo pelo qual se deve ordenar os resultados"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+          enum:
+          - "nome"
+          - "idade"
+          - "filmes.titulo"
+          - "filmes.ano_lancamento"
+          - "filmes.pontuacao_rotten_tomatoes"
+      - name: "sort"
+        in: "query"
+        description: "Se deve ordenadr de forma crescente ou decrescente"
+        required: false
+        type: "array"
+        items:
+          type: "string"
+          enum:
+          - "desc"
+          - "asc"
+      x-code-samples:
+        - lang: curl
+          source: |
+            curl -X GET -H "Content-Type: application/json" https://ghiblicrawler.herokuapp.com/pessoas?fmt=json
+      responses:
+        422:
+          description: "Invalid input"
+        200:
+          description: "Success"
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Pessoa'
+          examples:
+            application/json:
+              [
+              {
+                "nome": "Ashitaka",
+                "idade": "late teens",
+                "filmes": [
+                {
+                  "titulo": "Princess Mononoke",
+                  "ano_lancamento": "1997",
+                  "pontuacao_rotten_tomatoes": "92"
+                }
+                ]
+              },
+              {
+                "nome": "San",
+                "idade": "17",
+                "filmes": [
+                {
+                  "titulo": "Princess Mononoke",
+                  "ano_lancamento": "1997",
+                  "pontuacao_rotten_tomatoes": "92"
+                }
+                ]
+              }
+              ]
+definitions:
+
+  Filme:
+    type: "object"
+    properties:
+      titulo: 
+        type: "string"
+      ano_lancamento:
+        type: "integer"
+        format: "int64"
+      pontuacao_rotten_tomatoes:
+        type: "integer"
+        format: "int64"
+    xml:
+      name: "Filme"
+  Pessoa:
+    type: "object"
+    properties:
+      nome: 
+        type: "string"
+      idade:
+        type: "string"
+      filmes:
+        type: "array"
+        items: 
+          $ref: "#/definitions/Filme"
