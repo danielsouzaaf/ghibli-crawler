@@ -2,6 +2,7 @@
 
 namespace GhibliCrawler\Console;
 
+use GhibliCrawler\Console\Commands\ApiCrawl;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -26,6 +27,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->command(ApiCrawl::class)->cron("0 */2 * * *");
     }
 
     /**
