@@ -39,7 +39,7 @@ class CharacterRepository implements InsertRepositoryInterface
 
     private function attachRelatedMovies($id, $moviesId)
     {
-        $this->findById($id)->movies()->attach($moviesId);
+        $this->findById($id)->movies()->syncWithoutDetaching($moviesId);
     }
 
     public function findById($id)
