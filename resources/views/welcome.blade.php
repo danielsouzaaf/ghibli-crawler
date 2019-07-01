@@ -10,6 +10,6 @@
     <body>
     <redoc spec-url="{{ asset('doc/swagger.yaml') }}"></redoc>
 
-    <script src="https://cdn.jsdelivr.net/npm/redoc/bundles/redoc.standalone.js"> </script>
+    <script src="{{asset('js/redoc.standalone.js')}}"></script>
     </body>
 </html>
