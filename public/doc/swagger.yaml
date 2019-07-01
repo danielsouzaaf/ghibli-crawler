@@ -9,20 +9,20 @@ info:
     name: "Apache 2.0"
     url: "http://www.apache.org/licenses/LICENSE-2.0.html"
 host: "ghiblicrawler.herokuapp.com"
-basePath: "/"
+basePath: "/api"
 tags:
 - name: "pessoas"
   description: "Informações sobre os personagens e os filmes que aparecem"
 schemes:
-- "https"
+- "http"
 paths:
-  pessoas:
+  /pessoas:
     get:
       tags:
       - "pessoas"
       summary: "Retorna os personagens cadastrados no sistema"
       description: ""
-      operationId: "pessoas"
+      operationId: "/pessoas"
       consumes:
       - "application/json"
       - "application/xml"
@@ -73,7 +73,7 @@ paths:
       x-code-samples:
         - lang: curl
           source: |
-            curl -X GET -H "Content-Type: application/json" https://ghiblicrawler.herokuapp.com/pessoas?fmt=json
+            curl -X GET -H "Content-Type: application/json" http://ghiblicrawler.herokuapp.com/api/pessoas?fmt=json
       responses:
         422:
           description: "Invalid input"
