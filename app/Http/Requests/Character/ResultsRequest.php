@@ -16,7 +16,7 @@ class ResultsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -28,8 +28,8 @@ class ResultsRequest extends FormRequest
     {
         return [
             'fmt' => ['required', Rule::in(CharacterPresenter::FORMATS_ARRAY)],
-            'sort' => [Rule::in(['desc', 'asc'])],
-            'order' => [Rule::in([array_keys(CharacterRepository::MAPA_ORDER_CAMPOS)])]
+            'sort' => ['nullable', Rule::in(['desc', 'asc'])],
+            'order' => ['nullable', Rule::in(array_keys(CharacterRepository::MAPA_ORDER_CAMPOS))]
         ];
     }
 
@@ -40,5 +40,7 @@ class ResultsRequest extends FormRequest
         $data['order'] = $this->query('order');
         $data['filter'] = $this->query('filter');
         $data['sort'] = $this->query('sort');
+
+        return $data;
     }
 }

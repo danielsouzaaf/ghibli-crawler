@@ -2,11 +2,10 @@
 
 namespace GhibliCrawler\Http\Controllers;
 
+use GhibliCrawler\Http\Requests\Character\ResultsRequest;
 use GhibliCrawler\Presenters\CharacterPresenter;
 use GhibliCrawler\Repositories\CharacterRepository;
 use GhibliCrawler\Repositories\MovieRepository;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Response;
 
 class CharacterController extends Controller
 {
@@ -21,7 +20,7 @@ class CharacterController extends Controller
         $this->presenter = $presenter;
     }
 
-    public function results(Request $request)
+    public function results(ResultsRequest $request)
     {
         $characters = $this->characterRepository->filteredOrderedAndSortedWithMovies($request->input('filter'),
             $request->input('order'), $request->input('sort'));
