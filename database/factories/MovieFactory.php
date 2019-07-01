@@ -14,4 +14,6 @@ $factory->define(\GhibliCrawler\Models\Movie::class, function (Faker $faker) {
         'rt_score' => $faker->numberBetween(0, 100),
         'url' => $faker->url,
     ];
+})->afterCreating(\GhibliCrawler\Models\Movie::class, function($movie) {
+    $movie->characters()->attach(factory(\GhibliCrawler\Models\Character::class, 3)->create()->pluck('id'));
 });
