@@ -8,6 +8,20 @@ use GhibliCrawler\Models\Character;
 
 class CharacterRepository implements InsertRepositoryInterface
 {
+    const ORDER_NOME = 'nome';
+    const ORDER_IDADE = 'idade';
+    const ORDER_FILME_TITULO = 'filmes.titulo';
+    const ORDER_FILME_ANO_LANCAMENTO = 'filmes.ano_lancamento';
+    const ORDER_FILME_PONTUACAO_ROTTEN_TOMATOES = 'filmes.pontuacao_rotten_tomatoes';
+
+    const MAPA_ORDER_CAMPOS = [
+        self::ORDER_NOME => 'name',
+        self::ORDER_IDADE => 'age',
+        self::ORDER_FILME_TITULO => 'movies.title',
+        self::ORDER_FILME_ANO_LANCAMENTO => 'movies.release_year',
+        self::ORDER_FILME_PONTUACAO_ROTTEN_TOMATOES => 'movies.rt_score',
+    ];
+
     public function performUpdateOrCreate($data)
     {
         Character::updateOrCreate([
@@ -54,7 +68,7 @@ class CharacterRepository implements InsertRepositoryInterface
                         ->orWhere('rt_score', 'ilike', "%{$filter}%");
         });
         if ($order)
-            $query->orderBy($order, $sort ? $sort : 'asc');
+            $query->orderBy(self::MAPA_ORDER_CAMPOS[$order], $sort ? $sort : 'asc');
 
         return $query->get();
     }
